@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaDownload, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaDownload } from 'react-icons/fa';
 
 const About = () => {
   return (
@@ -53,7 +53,7 @@ const About = () => {
             <p className="text-gray-600 leading-relaxed">   
             Possessing a diverse skill set in software development, I excel in managing and leading
 teams to success. My education and experience in programming languages like C++
-and Java serve as a solid backbone in tackling complex technological challenges. I’m
+and Java serve as a solid backbone in tackling complex technological challenges. I'm
 dedicated to delivering innovative solutions by leveraging my critical thinking and
 problem-solving abilities in high-pressure environments.
             </p>

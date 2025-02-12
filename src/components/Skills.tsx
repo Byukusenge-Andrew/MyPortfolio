@@ -1,26 +1,24 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { Code2, Database, Globe, Lock, Cpu, Palette, GitBranch, Terminal, Cloud, Server,  Cog, Brain, Shield, Layout, Laptop, Smartphone } from 'lucide-react';
+import { 
+  Code2, 
+  Database, 
+  Globe, 
+  Cloud, 
+  Server, 
+  Cog, 
+  Brain, 
+  Shield, 
+  Layout, 
+  Laptop, 
+  Smartphone,
+  GitBranch 
+} from 'lucide-react';
 
-// Separate interfaces for main skills and detailed skills
+// Remove unused interfaces
 interface BaseSkill {
   name: string;
   level: number;
-}
-
-interface DetailedSkill extends BaseSkill {
-  icon?: JSX.Element;
-  color?: string;
-}
-
-interface SkillCategory {
-  title: string;
-  icon: string;
-  mainSkills: BaseSkill[];
-  detailedSkills: {
-    subtitle: string;
-    skills: BaseSkill[];
-  }[];
 }
 
 interface Skill {
@@ -191,123 +189,6 @@ const skills: Skill[] = [
       { name: "GitLab", level: 85 },
       { name: "Branching Strategies", level: 86 },
       { name: "Code Review", level: 88 }
-    ]
-  }
-];
-
-const skillCategories: SkillCategory[] = [
-  {
-    title: "Programming Languages",
-    icon: "💻",
-    mainSkills: [
-      { name: "JavaScript", level: 90 },
-      { name: "TypeScript", level: 85 },
-      { name: "Python", level: 80 },
-    ],
-    detailedSkills: [
-      {
-        subtitle: "Core Languages",
-        skills: [
-          { name: "JavaScript", level: 90 },
-          { name: "TypeScript", level: 85 },
-          { name: "Python", level: 80 },
-          { name: "Java", level: 75 },
-          { name: "C++", level: 70 },
-        ]
-      },
-      {
-        subtitle: "Scripting Languages",
-        skills: [
-          { name: "Bash", level: 75 },
-          { name: "PowerShell", level: 70 },
-        ]
-      }
-    ]
-  },
-  {
-    title: "Frontend Development",
-    icon: "🎨",
-    mainSkills: [
-      { name: "React", level: 90 },
-      { name: "Next.js", level: 85 },
-      { name: "Tailwind CSS", level: 88 },
-    ],
-    detailedSkills: [
-      {
-        subtitle: "Frameworks & Libraries",
-        skills: [
-          { name: "React", level: 90 },
-          { name: "Next.js", level: 85 },
-          { name: "Vue.js", level: 80 },
-          { name: "Angular", level: 75 },
-        ]
-      },
-      {
-        subtitle: "Styling",
-        skills: [
-          { name: "Tailwind CSS", level: 88 },
-          { name: "SASS/SCSS", level: 85 },
-          { name: "Styled Components", level: 82 },
-          { name: "CSS3", level: 90 },
-        ]
-      }
-    ]
-  },
-  {
-    title: "Backend Development",
-    icon: "⚙️",
-    mainSkills: [
-      { name: "Node.js", level: 88 },
-      { name: "Express", level: 85 },
-      { name: "MongoDB", level: 82 },
-    ],
-    detailedSkills: [
-      {
-        subtitle: "Backend Frameworks",
-        skills: [
-          { name: "Node.js", level: 88 },
-          { name: "Express", level: 85 },
-          { name: "Django", level: 80 },
-          { name: "Flask", level: 75 },
-        ]
-      },
-      {
-        subtitle: "Databases",
-        skills: [
-          { name: "MongoDB", level: 82 },
-          { name: "PostgreSQL", level: 80 },
-          { name: "MySQL", level: 78 },
-          { name: "Redis", level: 75 },
-        ]
-      }
-    ]
-  },
-  {
-    title: "DevOps & Tools",
-    icon: "🛠️",
-    mainSkills: [
-      { name: "Git", level: 88 },
-      { name: "Docker", level: 82 },
-      { name: "AWS", level: 78 },
-    ],
-    detailedSkills: [
-      {
-        subtitle: "Version Control & CI/CD",
-        skills: [
-          { name: "Git", level: 88 },
-          { name: "GitHub Actions", level: 80 },
-          { name: "Jenkins", level: 75 },
-        ]
-      },
-      {
-        subtitle: "Cloud & Deployment",
-        skills: [
-          { name: "Docker", level: 82 },
-          { name: "AWS", level: 78 },
-          { name: "Kubernetes", level: 70 },
-          { name: "Vercel", level: 85 },
-        ]
-      }
     ]
   }
 ];
