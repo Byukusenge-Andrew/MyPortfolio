@@ -15,12 +15,6 @@ import {
   GitBranch 
 } from 'lucide-react';
 
-// Remove unused interfaces
-interface BaseSkill {
-  name: string;
-  level: number;
-}
-
 interface Skill {
   name: string;
   icon: JSX.Element;
