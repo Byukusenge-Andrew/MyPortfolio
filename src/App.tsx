@@ -6,18 +6,38 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
+import Achievements from './components/Achievements';
+import ParticlesBackground from './components/ParticlesBackground';
+import TableOfContents from './components/TableOfContents';
 
 function App() {
   return (
-    <div className="relative">
+    <div className="relative overflow-x-hidden">
+      <ParticlesBackground />
       <Header />
+      <TableOfContents />
       <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Testimonials />
-        <Contact />
+        <section id="hero">
+          <Hero />
+        </section>
+        <section id="about">
+          <About />
+        </section>
+        <section id="skills">
+          <Skills />
+        </section>
+        <section id="projects">
+          <Projects />
+        </section>
+        <section id="achievements">
+          <Achievements />
+        </section>
+        <section id="testimonials">
+          <Testimonials />
+        </section>
+        <section id="contact">
+          <Contact />
+        </section>
       </main>
       <motion.footer 
         initial={{ opacity: 0 }}

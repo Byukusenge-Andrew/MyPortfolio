@@ -46,13 +46,13 @@ export default function Hero() {
             </a>
           </motion.div>
         </div>
-        <motion.div 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-float"
         >
-          <ArrowDown className="w-6 h-6 animate-bounce text-purple-600" />
+          <ArrowDown className="w-6 h-6 text-purple-600" />
         </motion.div>
       </div>
     </section>
