@@ -24,13 +24,6 @@ const achievements = [
     color: "from-blue-500 to-cyan-500"
   },
   {
-    icon: <Star className="w-6 h-6" />,
-    title: "Best Student Developer",
-    organization: "University of Rwanda",
-    date: "2022",
-    color: "from-green-500 to-emerald-500"
-  },
-  {
     icon: <Target className="w-6 h-6" />,
     title: "Microsoft Certified: Azure Developer",
     organization: "Microsoft",
@@ -97,7 +90,7 @@ const Achievements = () => {
         {/* Stats Section */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 overflow-hidden">
           {[
-            { label: "Certifications", value: "6+" },
+            { label: "Certifications", value: "5+" },
             { label: "Awards Won", value: "8+" },
             { label: "Projects Completed", value: "25+" },
             { label: "Happy Clients", value: "15+" }
