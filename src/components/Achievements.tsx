@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Award, GraduationCap, Trophy, Star, Target, Lightbulb } from 'lucide-react';
+import { Award, GraduationCap, Trophy,  Target, Lightbulb } from 'lucide-react';
 
 const achievements = [
   {
