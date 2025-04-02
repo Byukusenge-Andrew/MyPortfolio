@@ -34,7 +34,7 @@ export default function Hero() {
           >
             <a 
               href="#projects" 
-              className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full hover:opacity-90 transition-opacity shadow-lg hover:bg-blue-500 hover:text-white hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+              className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full hover:opacity-90  shadow-lg hover:bg-blue-500 hover:text-white hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
             >
               View My Work
             </a>

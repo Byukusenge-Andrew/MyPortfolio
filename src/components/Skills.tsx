@@ -230,8 +230,6 @@ const Skills = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Centered Popup for detailed skills */}
         <AnimatePresence>
           {selectedSkill && (
             <div className="fixed inset-0 flex items-center justify-center z-50">

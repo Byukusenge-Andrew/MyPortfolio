@@ -86,8 +86,6 @@ const Achievements = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Stats Section */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 overflow-hidden">
           {[
             { label: "Certifications", value: "5+" },
