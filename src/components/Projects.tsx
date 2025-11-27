@@ -24,6 +24,17 @@ const projects = [
     image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1000",
     github: "https://github.com/Byukusenge-Andrew/M.git",
     tags: ["React", "typescript","Framer Motion", "SVG"]
+  },
+  {
+    title:"social Media Management Platform",
+    description: "A comprehensive social media management platform that enables users to schedule posts, analyze performance, and engage with their audience across multiple social media channels from a single dashboard.",
+    image:"https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1000",
+    github: "https://github.com/Byukusenge-Andrew/SMMS",
+    demo: "https://keativ/",
+    tags: ["React", "Python", "NEXT", "Django"]
+  },
+  {
+    title:"Urukundo charity foundation"
   }
  
 ];

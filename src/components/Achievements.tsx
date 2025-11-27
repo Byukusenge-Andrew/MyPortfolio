@@ -2,41 +2,28 @@ import { motion } from 'framer-motion';
 import { Award, GraduationCap, Trophy,  Target, Lightbulb } from 'lucide-react';
 
 const achievements = [
-  {
-    icon: <GraduationCap className="w-6 h-6" />,
-    title: "AWS Certified Solutions Architect",
-    organization: "Amazon Web Services",
-    date: "2023",
-    color: "from-yellow-500 to-orange-500"
-  },
+ 
   {
     icon: <Trophy className="w-6 h-6" />,
-    title: "1st Place - National Hackathon",
-    organization: "Tech Innovation Challenge",
-    date: "2023",
+    title: "2st Place - National Hackathon",
+    organization: "National Cybersecurity Authority",
+    date: "2024",
     color: "from-purple-500 to-indigo-500"
   },
-  {
-    icon: <Award className="w-6 h-6" />,
-    title: "Google Cloud Professional",
-    organization: "Google Cloud",
-    date: "2023",
-    color: "from-blue-500 to-cyan-500"
-  },
+ 
   {
     icon: <Target className="w-6 h-6" />,
     title: "Microsoft Certified: Azure Developer",
     organization: "Microsoft",
-    date: "2023",
+    date: "2024",
     color: "from-red-500 to-pink-500"
   },
   {
-    icon: <Lightbulb className="w-6 h-6" />,
-    title: "Innovation Award",
-    organization: "Rwanda ICT Chamber",
-    date: "2023",
-    color: "from-amber-500 to-orange-500"
-  }
+    icon: <GraduationCap className="w-6 h-6" />,
+    title: "Cyberium Graduate",
+    organization: "Cyberium Academy",
+    date: "2025",
+    color: "from-green-500 to-teal-500"}
 ];
 
 const Achievements = () => {
