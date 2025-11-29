@@ -93,7 +93,7 @@ export default function Projects() {
                 <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                 <p className="text-gray-600 mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, tagIndex) => (
+                  {project.tags?.map((tag, tagIndex) => (
                     <span 
                       key={tagIndex}
                       className="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm"
