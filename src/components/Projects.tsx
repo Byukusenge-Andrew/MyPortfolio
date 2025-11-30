@@ -28,13 +28,18 @@ const projects = [
   {
     title:"social Media Management Platform",
     description: "A comprehensive social media management platform that enables users to schedule posts, analyze performance, and engage with their audience across multiple social media channels from a single dashboard.",
-    image:"https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1000",
+    image:"/keativ.png",
     github: "https://github.com/Byukusenge-Andrew/SMMS",
-    demo: "https://keativ/",
+    demo: "https://keativ.netlify.app/",
     tags: ["React", "Python", "NEXT", "Django"]
   },
   {
-    title:"Urukundo charity foundation"
+    title:"Urukundo charity foundation",
+    description: "A charity organization focused on providing support and resources to those in need.",
+    image:"/charity.png",
+    github: "",
+    demo: "https://urukundo.echo-solution.com/",
+    tags: ["React", "Python", "NEXT", "Django"]
   }
  
 ];
