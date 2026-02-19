@@ -1,130 +1,106 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { ThumbsUp, ThumbsDown } from 'lucide-react';
 
 interface Testimonial {
   id: number;
   name: string;
-  company: string;
+  role: string;
   image: string;
   text: string;
-  upvotes: number;
-  downvotes: number;
+  stars: number;
 }
 
+const testimonials: Testimonial[] = [
+  {
+    id: 1,
+    name: "Migisha Ivan",
+    role: "Fellow Student",
+    image: "https://i.pravatar.cc/150?img=11",
+    text: "Byukusenge is a great developer and an even better person to collaborate with. Always willing to help, a natural team player, and an excellent problem solver who finds a way to get the job done no matter the challenge.",
+    stars: 5,
+  },
+  {
+    id: 2,
+    name: "Kivugo Fignole",
+    role: "Friend & Collaborator",
+    image: "https://i.pravatar.cc/150?img=2",
+    text: "Having known Byukusenge for years, I can confidently say he brings great personality and dedication to everything he does. He lifts those around him and approaches every challenge with positivity and creativity.",
+    stars: 5,
+  },
+];
+
+const Stars = ({ count }: { count: number }) => (
+  <div className="flex gap-1">
+    {Array.from({ length: 5 }).map((_, i) => (
+      <svg
+        key={i}
+        className={`w-4 h-4 ${i < count ? 'text-yellow-400' : 'text-slate-600'} fill-current`}
+        viewBox="0 0 20 20"
+      >
+        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+      </svg>
+    ))}
+  </div>
+);
+
 const Testimonials = () => {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([
-    {
-      id: 1,
-      name: "Migisha Ivan",
-      company: "Fellow Student",
-      image: "https://i.pravatar.cc/150?img=11",
-      text: "Byukusenge is a great developer and a great person to work with. He is always willing to help and is a great team player. He is also a great problem solver and always finds a way to get the job done.",
-      upvotes: 0,
-      downvotes: 0
-    },
-    {
-      id: 2,
-      name: "Kivugo Fignole",
-      company: "Friend",
-      image: "https://i.pravatar.cc/150?img=2",
-      text: "Byukusenge is a great person having known him, he has a great personality and has always been a great friend to me and others.",
-      upvotes: 0,
-      downvotes: 0
-    }
-  ]);
-
-  const handleVote = (id: number, voteType: 'up' | 'down') => {
-    setTestimonials(prevTestimonials =>
-      prevTestimonials.map(testimonial => {
-        if (testimonial.id === id) {
-          return {
-            ...testimonial,
-            upvotes: voteType === 'up' ? testimonial.upvotes + 1 : testimonial.upvotes,
-            downvotes: voteType === 'down' ? testimonial.downvotes + 1 : testimonial.downvotes
-          };
-        }
-        return testimonial;
-      })
-    );
-  };
-
   return (
-    <section id="testimonials" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-start">
-          <div className="w-full">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
+    <section id="testimonials" className="py-24 bg-gray-950">
+      <div className="absolute inset-x-0 top-0 h-px section-separator" />
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold text-white mb-4">What People Say</h2>
+          <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full mb-6" />
+          <p className="text-slate-400 max-w-xl mx-auto">
+            Words from people I've had the privilege of working and collaborating with.
+          </p>
+        </motion.div>
+
+        <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={testimonial.id}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-4xl font-bold mb-12 text-center"
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.15 }}
+              className="glass-card rounded-2xl p-8 border border-white/5 hover:border-indigo-500/20 transition-all relative"
             >
-              Client Testimonials
-            </motion.h2>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-              {testimonials.map((testimonial) => (
-                <motion.div
-                  key={testimonial.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-                >
-                  <div className="flex items-center mb-6">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-16 h-16 rounded-full mr-4 object-cover border-2 border-blue-100"
-                    />
-                    <div>
-                      <h3 className="font-bold text-lg text-gray-800">{testimonial.name}</h3>
-                      <p className="text-sm text-gray-600">
-                        <span className="text-blue-600">{testimonial.company}</span>
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed mb-6">"{testimonial.text}"</p>
-                  <div className="flex items-center justify-between mt-4">
-                    <div className="flex items-center space-x-4">
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => handleVote(testimonial.id, 'up')}
-                        className="flex items-center space-x-1 text-green-600 hover:text-green-700"
-                      >
-                        <ThumbsUp className="w-5 h-5" />
-                        <span>{testimonial.upvotes}</span>
-                      </motion.button>
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => handleVote(testimonial.id, 'down')}
-                        className="flex items-center space-x-1 text-red-600 hover:text-red-700"
-                      >
-                        <ThumbsDown className="w-5 h-5" />
-                        <span>{testimonial.downvotes}</span>
-                      </motion.button>
-                    </div>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className="w-5 h-5 text-yellow-400 fill-current"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                        </svg>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+              {/* Decorative quote */}
+              <span className="absolute top-4 right-6 text-7xl text-indigo-500/10 font-serif leading-none select-none">
+                "
+              </span>
+
+              {/* Stars */}
+              <Stars count={testimonial.stars} />
+
+              {/* Quote */}
+              <p className="text-slate-300 leading-relaxed mt-4 mb-6 relative z-10">
+                "{testimonial.text}"
+              </p>
+
+              {/* Author */}
+              <div className="flex items-center gap-4">
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.name}
+                  className="w-12 h-12 rounded-full object-cover border-2 border-indigo-500/30"
+                />
+                <div>
+                  <p className="text-white font-semibold">{testimonial.name}</p>
+                  <p className="text-indigo-400 text-sm">{testimonial.role}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default Testimonials; 
+export default Testimonials;
