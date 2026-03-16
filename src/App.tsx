@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Heart } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -62,6 +63,7 @@ function App() {
           </div>
         </div>
       </motion.footer>
+      <Analytics />
     </div>
   );
 }
