@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, FileText, Menu, X } from 'lucide-react';
+import { Github, FileText, Menu, X, Terminal } from 'lucide-react';
 import Logo from './Logo';
 
 const navItems = [
@@ -11,7 +11,11 @@ const navItems = [
   { name: 'Contact', href: '#contact' },
 ];
 
-const Header = () => {
+interface HeaderProps {
+  onOpenTerminal?: () => void;
+}
+
+const Header = ({ onOpenTerminal }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -75,6 +79,18 @@ const Header = () => {
 
             <div className="h-4 w-px bg-white/10 mx-2" />
 
+            {onOpenTerminal && (
+              <button
+                onClick={onOpenTerminal}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-mono font-medium text-emerald-400 hover:text-emerald-300 bg-emerald-950/20 hover:bg-emerald-950/40 border border-emerald-900/50 transition-colors"
+                title="Open Interactive CLI (Cmd+K)"
+              >
+                <Terminal className="w-3.5 h-3.5" />
+                <span>CLI</span>
+                <span className="text-[10px] text-emerald-600 border border-emerald-800/40 rounded px-1 hidden lg:inline">⌘K</span>
+              </button>
+            )}
+
             <a
               href="/cisc_2_2.pdf"
               download
@@ -124,6 +140,18 @@ const Header = () => {
                 </a>
               ))}
               <div className="pt-2 border-t border-white/[0.08] flex gap-2">
+                {onOpenTerminal && (
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      onOpenTerminal();
+                    }}
+                    className="flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-mono font-medium text-emerald-300 border border-emerald-900/50 rounded-md bg-emerald-950/20"
+                  >
+                    <Terminal className="w-3.5 h-3.5" />
+                    CLI Console
+                  </button>
+                )}
                 <a
                   href="/cisc_2_2.pdf"
                   download

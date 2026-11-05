@@ -9,7 +9,11 @@ const roles = [
   'Applied AI / ML & RAG Specialist',
 ];
 
-export default function Hero() {
+interface HeroProps {
+  onOpenTerminal?: () => void;
+}
+
+export default function Hero({ onOpenTerminal }: HeroProps) {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayed, setDisplayed] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -86,6 +90,16 @@ export default function Hero() {
 
           {/* Action buttons */}
           <div className="flex flex-wrap justify-center lg:justify-start items-center gap-3 mb-10">
+            {onOpenTerminal && (
+              <button
+                onClick={onOpenTerminal}
+                className="px-4 py-2.5 rounded-md bg-emerald-950/40 hover:bg-emerald-950/70 border border-emerald-800/60 text-emerald-300 hover:text-emerald-200 text-sm font-mono font-medium transition-colors flex items-center gap-2 shadow-sm"
+              >
+                <Terminal className="w-4 h-4 text-emerald-400" />
+                <span>Launch CLI Console</span>
+                <span className="text-[10px] text-emerald-500 border border-emerald-800/60 px-1 rounded">⌘K</span>
+              </button>
+            )}
             <a
               href="#projects"
               className="px-5 py-2.5 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors flex items-center gap-1.5 shadow-sm"

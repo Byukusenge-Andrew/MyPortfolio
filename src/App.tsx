@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Github, Linkedin, Twitter, ArrowUp, Code2 } from 'lucide-react';
 import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header';
@@ -9,6 +10,7 @@ import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import ParticlesBackground from './components/ParticlesBackground';
 import TableOfContents from './components/TableOfContents';
+import TerminalDrawer from './components/TerminalDrawer';
 
 const socials = [
   { href: 'https://github.com/Byukusenge-Andrew', icon: <Github className="w-4 h-4" />, label: 'GitHub' },
@@ -17,6 +19,8 @@ const socials = [
 ];
 
 function App() {
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -24,11 +28,12 @@ function App() {
   return (
     <div className="relative min-h-screen bg-[#090a0f] text-zinc-100 overflow-x-hidden">
       <ParticlesBackground />
-      <Header />
+      <Header onOpenTerminal={() => setIsTerminalOpen(true)} />
       <TableOfContents />
+      <TerminalDrawer isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
 
       <main>
-        <section id="hero"><Hero /></section>
+        <section id="hero"><Hero onOpenTerminal={() => setIsTerminalOpen(true)} /></section>
         <section id="about"><About /></section>
         <section id="skills"><Skills /></section>
         <section id="projects"><Projects /></section>

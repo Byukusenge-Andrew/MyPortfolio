@@ -1,347 +1,306 @@
-import { useState, useEffect, type ReactNode } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 import {
-  Code2, Database, Globe, Cloud, Server,
-  Brain, Shield, Cpu, Layers, X,
-  Workflow
+  Globe, Server, Brain, Shield, Cpu, Terminal, CheckCircle2,
+  ArrowRight
 } from 'lucide-react';
 
-interface DetailSkill {
+interface TechItem {
   name: string;
-  level: number;
+  detail: string;
+  practicalApplication: string;
 }
 
-interface Skill {
-  name: string;
-  icon: ReactNode;
-  level: number;
-  description: string;
-  detailedSkills: DetailSkill[];
+interface SystemLayer {
+  layer: string;
+  title: string;
+  icon: JSX.Element;
+  tagline: string;
+  technologies: TechItem[];
 }
 
-const skills: Skill[] = [
+const systemLayers: SystemLayer[] = [
   {
-    name: 'Programming Languages',
-    icon: <Code2 className="w-4 h-4 text-indigo-400" />,
-    level: 90,
-    description: 'Systems-level C/C++, Python, Java, Ruby, JavaScript, TypeScript',
-    detailedSkills: [
-      { name: 'C / C++', level: 88 },
-      { name: 'Python', level: 92 },
-      { name: 'TypeScript', level: 88 },
-      { name: 'JavaScript', level: 90 },
-      { name: 'Java', level: 82 },
-      { name: 'Ruby', level: 75 },
+    layer: "Layer 0",
+    title: "Low-Level Systems & Hardware Interfacing",
+    icon: <Cpu className="w-4 h-4 text-emerald-400" />,
+    tagline: "Memory architectures, algorithm design, POSIX sockets & microcontrollers",
+    technologies: [
+      {
+        name: "C & C++ (Modern C++20)",
+        detail: "Pointers, dynamic memory management, STL algorithms, RAII, hardened compilation",
+        practicalApplication: "AuraUI 2 desktop runtime & Cachedb in-memory ARC database engine",
+      },
+      {
+        name: "Native Desktop Runtime & In-Process IPC",
+        detail: "Cross-platform WebView2 / WKWebView / WebKitGTK bindings, Zero-Trust powerbox capability security",
+        practicalApplication: "Built AuraUI 2 framework with zero-port IPC and ~800KB stripped binary size",
+      },
+      {
+        name: "Cache Eviction & Cardinality",
+        detail: "ARC (Adaptive Replacement Cache), LRU, LFU, HyperLogLog algorithm",
+        practicalApplication: "Sub-microsecond key lookups with bounded memory constraints",
+      },
+      {
+        name: "Embedded Systems & IoT",
+        detail: "Microcontroller logic, sensor telemetry, serial communication, hardware buses",
+        practicalApplication: "Studied at Rwanda Coding Academy; robotics ideation at FIRST Lego League",
+      },
+      {
+        name: "Low-Level Networking & Sockets",
+        detail: "POSIX TCP/UDP socket programming, protocol serialization, Pub/Sub",
+        practicalApplication: "Custom client-server TCP broker for multi-database instances",
+      },
     ],
   },
   {
-    name: 'Backend Engineering',
-    icon: <Server className="w-4 h-4 text-indigo-400" />,
-    level: 88,
-    description: 'NestJS, Django, Spring Boot, REST APIs, and JWT authentication',
-    detailedSkills: [
-      { name: 'NestJS', level: 90 },
-      { name: 'Django / Python', level: 88 },
-      { name: 'Spring Boot (Java 17)', level: 82 },
-      { name: 'REST APIs & JWT Auth', level: 92 },
-      { name: 'RBAC Access Control', level: 86 },
-    ],
-  },
-  {
-    name: 'Applied AI / ML & RAG',
+    layer: "Layer 1",
+    title: "Edge AI, Quantization & Retrieval Systems",
     icon: <Brain className="w-4 h-4 text-indigo-400" />,
-    level: 86,
-    description: 'QLoRA fine-tuning, GGUF quantization, llama.cpp, FAISS vector RAG',
-    detailedSkills: [
-      { name: 'FAISS Vector Search & RAG', level: 90 },
-      { name: 'GGUF & llama.cpp (CPU inference)', level: 88 },
-      { name: 'QLoRA Fine-Tuning', level: 84 },
-      { name: 'Similarity-Gated Retrieval', level: 86 },
-      { name: 'Qwen & LLM Pipelines', level: 85 },
+    tagline: "Offline CPU inference, vector search, parameter fine-tuning & hallucination gating",
+    technologies: [
+      {
+        name: "llama.cpp & GGUF Quantization",
+        detail: "4-bit quantization (Q4_K_M), offline CPU execution without GPU dependency",
+        practicalApplication: "Rights Navigator offline legal intelligence runner",
+      },
+      {
+        name: "FAISS Similarity-Gated Vector Search",
+        detail: "Dense vector indexing, cosine similarity threshold gating, out-of-domain rejection",
+        practicalApplication: "Grounding legal question-answering across 4 African legal codes",
+      },
+      {
+        name: "QLoRA Parameter Fine-Tuning",
+        detail: "Low-rank adaptation on small open models (Qwen3-4B), prompt template engineering",
+        practicalApplication: "Fine-tuned multilingual models with zero cloud API reliance",
+      },
+      {
+        name: "Multilingual Legal Corpora",
+        detail: "Cross-lingual embedding search for Swahili, Yoruba, French, Kinyarwanda",
+        practicalApplication: "ADTC 2026 legal assistance submission",
+      },
     ],
   },
   {
-    name: 'Frontend Engineering',
-    icon: <Globe className="w-4 h-4 text-indigo-400" />,
-    level: 85,
-    description: 'React, Next.js, Angular, Three.js 3D visualization, Tailwind CSS',
-    detailedSkills: [
-      { name: 'React', level: 90 },
-      { name: 'Next.js', level: 88 },
-      { name: 'Three.js / WebGL', level: 82 },
-      { name: 'Angular', level: 80 },
-      { name: 'Tailwind CSS', level: 92 },
+    layer: "Layer 2",
+    title: "Production Backend & Distributed Services",
+    icon: <Server className="w-4 h-4 text-sky-400" />,
+    tagline: "Production RESTful microservices, relational schemas, caching & security",
+    technologies: [
+      {
+        name: "NestJS & Node.js",
+        detail: "Modular architecture, dependency injection, async request handling, guards",
+        practicalApplication: "Production microservices and enterprise API gateways",
+      },
+      {
+        name: "PostgreSQL & Database Optimization",
+        detail: "Relational schema modeling, B-Tree index tuning, transactional integrity, migrations",
+        practicalApplication: "Optimized complex query execution paths and low-latency storage",
+      },
+      {
+        name: "Spring Boot 3 & Java 17",
+        detail: "Layered controller-service-repository patterns, Spring Security, Hibernate ORM",
+        practicalApplication: "BUSGO transit booking and schedule reservation engine",
+      },
+      {
+        name: "Django & Python Services",
+        detail: "Django REST Framework, ORM, multi-tenant isolation, background jobs",
+        practicalApplication: "SMMS social orchestration and account management backend",
+      },
     ],
   },
   {
-    name: 'Databases & In-Memory Engines',
-    icon: <Database className="w-4 h-4 text-indigo-400" />,
-    level: 85,
-    description: 'PostgreSQL, MySQL, Redis-like custom C++ engines (LRU/LFU/ARC)',
-    detailedSkills: [
-      { name: 'PostgreSQL', level: 88 },
-      { name: 'MySQL', level: 84 },
-      { name: 'In-Memory DB Architectures (C++)', level: 85 },
-      { name: 'LRU/ARC Eviction & HyperLogLog', level: 84 },
+    layer: "Layer 3",
+    title: "Visual Computing & Client Platforms",
+    icon: <Globe className="w-4 h-4 text-purple-400" />,
+    tagline: "In-browser 3D graphics, state management, design systems & cross-platform",
+    technologies: [
+      {
+        name: "Three.js & WebGL",
+        detail: "Scene graphs, camera frustums, procedural geometries, PBR materials, shaders",
+        practicalApplication: "ModelVerse interactive 3D model studio directly in the browser",
+      },
+      {
+        name: "React & Next.js",
+        detail: "Server components, client hydration, dynamic routing, hook lifecycle tuning",
+        practicalApplication: "Recovery Credit and SMMS responsive frontend architectures",
+      },
+      {
+        name: "TypeScript & Strict Type Safety",
+        detail: "Discriminated unions, generics, mapped types, compile-time contract enforcement",
+        practicalApplication: "Standard across all client, service, and full-stack repositories",
+      },
+      {
+        name: "Angular & Component Architecture",
+        detail: "Directives, RxJS observables, reactive forms, modular client routing",
+        practicalApplication: "JobMatch recruitment portal built for an Upwork international client",
+      },
     ],
   },
   {
-    name: 'Cybersecurity & Code Audit',
-    icon: <Shield className="w-4 h-4 text-indigo-400" />,
-    level: 84,
-    description: 'Code review, vulnerability analysis, ethical hacking & network defense',
-    detailedSkills: [
-      { name: 'Vulnerability Analysis', level: 85 },
-      { name: 'Secure Code Reviews', level: 88 },
-      { name: 'Network Security Protocols', level: 84 },
-      { name: 'Defensive Cyber Strategies', level: 82 },
-    ],
-  },
-  {
-    name: 'Cloud & Infrastructure',
-    icon: <Cloud className="w-4 h-4 text-indigo-400" />,
-    level: 80,
-    description: 'AWS EC2 provisioning, service scaling, Linux environment & CI/CD',
-    detailedSkills: [
-      { name: 'AWS EC2 Services', level: 84 },
-      { name: 'Linux System Administration', level: 85 },
-      { name: 'Docker Containerization', level: 80 },
-      { name: 'CI/CD Pipelines', level: 78 },
-    ],
-  },
-  {
-    name: 'Embedded Systems & IoT',
-    icon: <Cpu className="w-4 h-4 text-indigo-400" />,
-    level: 82,
-    description: 'Microcontroller programming, hardware-software interfacing & sensors',
-    detailedSkills: [
-      { name: 'C/C++ Embedded Programming', level: 84 },
-      { name: 'IoT Fundamentals', level: 80 },
-      { name: 'Hardware Interfacing', level: 78 },
-      { name: 'Robotics & Control Logic', level: 82 },
+    layer: "Layer 4",
+    title: "Cybersecurity & System Hardening",
+    icon: <Shield className="w-4 h-4 text-amber-400" />,
+    tagline: "Vulnerability analysis, secure authentication, defensive protocols & code review",
+    technologies: [
+      {
+        name: "Vulnerability Auditing & Code Review",
+        detail: "Static analysis, memory safety audit, OWASP Top 10 mitigation, sanitized inputs",
+        practicalApplication: "Placed 2nd in nationwide cybersecurity competition",
+      },
+      {
+        name: "JWT & Role-Based Access Control",
+        detail: "Cryptographic token verification, refresh token rotation, granular permission trees",
+        practicalApplication: "Secured enterprise auth boundaries in BUSGO and production services",
+      },
+      {
+        name: "Ethical Hacking & Network Defense",
+        detail: "Network packet inspection, security protocol audit, penetration lab practices",
+        practicalApplication: "Cyberium Academy cybersecurity graduate certification",
+      },
+      {
+        name: "AWS EC2 & Linux Hardening",
+        detail: "Security groups, IAM policies, SSH bastion configs, container isolation",
+        practicalApplication: "Deployed and maintained scalable services on AWS EC2",
+      },
     ],
   },
 ];
 
-const techPills = [
-  'C / C++', 'Python', 'NestJS', 'PostgreSQL', 'TypeScript', 'JavaScript',
-  'Java 17', 'Spring Boot 3', 'Django', 'Ruby', 'llama.cpp', 'GGUF', 'FAISS',
-  'QLoRA', 'React', 'Next.js', 'Angular', 'Three.js', 'AWS EC2', 'MySQL',
-  'Linux', 'Docker', 'JWT', 'Git'
-];
-
-type Tab = 'categories' | 'stack';
-
-function SkillModal({ skill, onClose }: { skill: Skill; onClose: () => void }) {
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [onClose]);
+export default function Skills() {
+  const [selectedLayerIndex, setSelectedLayerIndex] = useState(0);
+  const activeLayer = systemLayers[selectedLayerIndex];
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
-      <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={onClose} />
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
-        transition={{ duration: 0.15 }}
-        className="relative w-full max-w-lg bg-[#11131a] border border-white/10 rounded-xl p-6 shadow-xl z-10"
-      >
-        <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-              {skill.icon}
-            </div>
-            <div>
-              <h3 className="text-base font-semibold text-white">{skill.name}</h3>
-              <p className="text-xs text-zinc-400">Proficiency index: {skill.level}%</p>
-            </div>
-          </div>
-          <button
-            onClick={onClose}
-            className="text-zinc-400 hover:text-white p-1.5 hover:bg-white/[0.05] rounded-md transition-colors"
-            aria-label="Close modal"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-
-        <div className="mb-5">
-          <div className="flex justify-between text-xs text-zinc-400 mb-1.5 font-mono">
-            <span>Overall Proficiency</span>
-            <span className="text-indigo-400 font-semibold">{skill.level}%</span>
-          </div>
-          <div className="w-full bg-zinc-900 rounded-full h-1.5 overflow-hidden">
-            <div
-              style={{ width: `${skill.level}%` }}
-              className="h-full bg-indigo-500 rounded-full"
-            />
-          </div>
-        </div>
-
-        <div className="space-y-3.5 max-h-[50vh] overflow-y-auto pr-1">
-          {skill.detailedSkills.map((detail, i) => (
-            <div key={i}>
-              <div className="flex justify-between text-xs mb-1 font-mono">
-                <span className="text-zinc-200">{detail.name}</span>
-                <span className="text-zinc-400">{detail.level}%</span>
-              </div>
-              <div className="w-full bg-zinc-900 rounded-full h-1 overflow-hidden">
-                <div
-                  style={{ width: `${detail.level}%` }}
-                  className="h-full bg-zinc-400 rounded-full"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6 pt-4 border-t border-white/[0.08] flex justify-between items-center text-xs text-zinc-500">
-          <span>Press ESC or click outside to dismiss</span>
-          <button
-            onClick={onClose}
-            className="px-3 py-1 rounded border border-zinc-800 hover:bg-zinc-800 text-zinc-300 transition-colors"
-          >
-            Close
-          </button>
-        </div>
-      </motion.div>
-    </div>
-  );
-}
-
-const Skills = () => {
-  const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
-  const [activeTab, setActiveTab] = useState<Tab>('categories');
-
-  return (
-    <section className="py-20 bg-[#090a0f] border-t border-white/[0.06]" id="skills">
+    <section id="skills" className="py-24 bg-[#090a0f] border-t border-white/[0.08]">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div className="max-w-xl">
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-indigo-400 mb-2">
-              <span className="w-2 h-px bg-indigo-500" />
-              <span>Technical Competencies</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">Skills &amp; Expertise</h2>
-            <p className="text-zinc-400 text-sm mt-2 leading-relaxed">
-              Curated capabilities verified by coursework at Rwanda Coding Academy, production internships, and independent engineering projects.
-            </p>
+        {/* Section Header */}
+        <div className="max-w-2xl mb-14">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-indigo-400 mb-2">
+            <span className="w-2 h-px bg-indigo-500" />
+            <span>Systems Architecture &bull; Technical Competencies</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            Engineering Knowledge by System Layer
+          </h2>
+          <p className="text-zinc-400 text-sm sm:text-base mt-2 leading-relaxed">
+            Eliminating arbitrary percentage bars in favor of concrete architectural capabilities, from low-level memory allocation to edge AI inference and distributed backends.
+          </p>
+        </div>
+
+        {/* Master-Detail Layer Switcher */}
+        <div className="grid lg:grid-cols-12 gap-8 items-start">
+          {/* Layer Selection Nav (Left Column) */}
+          <div className="lg:col-span-5 space-y-2">
+            {systemLayers.map((layer, idx) => {
+              const isSelected = selectedLayerIndex === idx;
+              return (
+                <button
+                  key={layer.layer}
+                  onClick={() => setSelectedLayerIndex(idx)}
+                  className={`w-full p-4 rounded-xl border text-left transition-all flex items-start justify-between gap-3 ${
+                    isSelected
+                      ? 'bg-zinc-900 border-indigo-500/50 shadow-md ring-1 ring-indigo-500/20'
+                      : 'bg-zinc-900/40 border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/60'
+                  }`}
+                >
+                  <div className="flex items-start gap-3">
+                    <div
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                        isSelected
+                          ? 'bg-indigo-500/20 border border-indigo-500/40 text-indigo-400'
+                          : 'bg-zinc-800 border border-zinc-700/60 text-zinc-400'
+                      }`}
+                    >
+                      {layer.icon}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-indigo-400">
+                          {layer.layer}
+                        </span>
+                      </div>
+                      <h4 className="text-sm font-semibold text-white leading-tight mt-0.5">
+                        {layer.title}
+                      </h4>
+                      <p className="text-[11px] text-zinc-400 leading-snug mt-1 line-clamp-1">
+                        {layer.tagline}
+                      </p>
+                    </div>
+                  </div>
+
+                  <ArrowRight
+                    className={`w-4 h-4 mt-1 transition-transform ${
+                      isSelected ? 'text-indigo-400 translate-x-0.5' : 'text-zinc-600 opacity-0 group-hover:opacity-100'
+                    }`}
+                  />
+                </button>
+              );
+            })}
           </div>
 
-          <div className="flex rounded-lg border border-white/10 p-1 bg-zinc-900/80 gap-1 self-start md:self-auto">
-            <button
-              onClick={() => setActiveTab('categories')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                activeTab === 'categories'
-                  ? 'bg-indigo-600 text-white shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200'
-              }`}
-            >
-              <Layers className="w-3.5 h-3.5" />
-              <span>Domain Disciplines</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('stack')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                activeTab === 'stack'
-                  ? 'bg-indigo-600 text-white shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200'
-              }`}
-            >
-              <Workflow className="w-3.5 h-3.5" />
-              <span>Full Tech Stack</span>
-            </button>
+          {/* Layer Detail Specifications (Right Column) */}
+          <div className="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-[#0e1118] border border-zinc-800/90 shadow-xl">
+            <div className="flex items-center justify-between pb-4 mb-6 border-b border-zinc-800">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+                  {activeLayer.icon}
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-indigo-400 font-bold">
+                    {activeLayer.layer} Specifications
+                  </span>
+                  <h3 className="text-lg font-bold text-white">{activeLayer.title}</h3>
+                </div>
+              </div>
+              <span className="text-[11px] font-mono text-zinc-500 hidden sm:inline">
+                Verified Skills
+              </span>
+            </div>
+
+            <p className="text-xs text-zinc-400 font-mono mb-6 pb-2 border-b border-zinc-800/60">
+              // {activeLayer.tagline}
+            </p>
+
+            <div className="space-y-4">
+              {activeLayer.technologies.map((tech, tIdx) => (
+                <div
+                  key={tIdx}
+                  className="p-4 rounded-xl bg-zinc-950/70 border border-zinc-800/80 hover:border-zinc-700 transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-2 mb-1.5">
+                    <h5 className="text-sm font-semibold text-white flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                      <span>{tech.name}</span>
+                    </h5>
+                  </div>
+                  <p className="text-xs text-zinc-300 leading-relaxed mb-2.5 pl-3.5">
+                    {tech.detail}
+                  </p>
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 bg-emerald-950/20 border border-emerald-900/40 px-2.5 py-1 rounded w-fit">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                    <span>Applied: {tech.practicalApplication}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {activeTab === 'categories' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {skills.map((skill) => (
-              <button
-                key={skill.name}
-                onClick={() => setSelectedSkill(skill)}
-                className="group p-5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900 text-left transition-all duration-150 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="w-8 h-8 rounded-lg bg-zinc-800/80 border border-zinc-700/60 flex items-center justify-center">
-                      {skill.icon}
-                    </div>
-                    <span className="text-xs font-mono font-semibold text-zinc-400 group-hover:text-indigo-400 transition-colors">
-                      {skill.level}%
-                    </span>
-                  </div>
-                  <h3 className="text-sm font-semibold text-white mb-1 leading-snug">{skill.name}</h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed mb-4">{skill.description}</p>
-                </div>
-
-                <div>
-                  <div className="w-full bg-zinc-950 rounded-full h-1 overflow-hidden mb-2">
-                    <div
-                      style={{ width: `${skill.level}%` }}
-                      className="h-full bg-indigo-500 rounded-full"
-                    />
-                  </div>
-                  <span className="text-[11px] text-zinc-500 group-hover:text-zinc-300 font-mono transition-colors">
-                    Inspect breakdown &rarr;
-                  </span>
-                </div>
-              </button>
-            ))}
+        {/* Global Tech Strip */}
+        <div className="mt-14 p-5 rounded-xl bg-zinc-900/40 border border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
+            <Terminal className="w-4 h-4 text-indigo-400" />
+            <span>Complete verified toolset: C, C++, Python, Java 17, NestJS, React, Next.js, llama.cpp, FAISS, PostgreSQL, Docker, AWS EC2, Three.js, Linux</span>
           </div>
-        )}
-
-        {activeTab === 'stack' && (
-          <div className="space-y-8">
-            <div className="p-6 rounded-xl bg-zinc-900/60 border border-zinc-800/80">
-              <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-4">Core Toolset &amp; Technologies</h3>
-              <div className="flex flex-wrap gap-2">
-                {techPills.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1.5 rounded-md text-xs font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-colors cursor-default"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-6 rounded-xl bg-zinc-900/60 border border-zinc-800/80">
-              <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-4">Domain Proficiency Matrix</h3>
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {skills.map((skill) => (
-                  <div key={skill.name} className="p-3 rounded-lg bg-zinc-950/60 border border-zinc-900">
-                    <div className="flex justify-between items-center text-xs mb-1.5">
-                      <span className="text-zinc-300 font-medium truncate pr-2">{skill.name}</span>
-                      <span className="font-mono text-zinc-500 text-[11px]">{skill.level}%</span>
-                    </div>
-                    <div className="w-full bg-zinc-900 rounded-full h-1 overflow-hidden">
-                      <div
-                        style={{ width: `${skill.level}%` }}
-                        className="h-full bg-zinc-400 rounded-full"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+          <a
+            href="#projects"
+            className="text-xs font-mono text-indigo-400 hover:text-indigo-300 whitespace-nowrap flex items-center gap-1"
+          >
+            <span>Review implementation case studies</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
       </div>
-
-      <AnimatePresence>
-        {selectedSkill && (
-          <SkillModal skill={selectedSkill} onClose={() => setSelectedSkill(null)} />
-        )}
-      </AnimatePresence>
     </section>
   );
-};
-
-export default Skills;
+}
