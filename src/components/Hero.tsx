@@ -41,9 +41,9 @@ export default function Hero({ onOpenTerminal }: HeroProps) {
       {/* Revolving Programming Language Rings */}
       <Shapes3D />
 
-      <div className="container relative z-10 mx-auto px-6 py-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div className="container relative z-10 mx-auto px-6 py-12 flex flex-col items-center justify-center text-center">
         {/* Main Content */}
-        <div className="flex-1 text-center lg:text-left">
+        <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
           {/* Status badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-zinc-900/90 border border-zinc-800 text-zinc-300 mb-6">
             <span className="relative flex h-2 w-2">
@@ -58,14 +58,14 @@ export default function Hero({ onOpenTerminal }: HeroProps) {
           </h1>
 
           {/* Typewriter role */}
-          <div className="flex items-center justify-center lg:justify-start gap-2 text-lg sm:text-xl text-indigo-400 font-mono mb-6 h-7">
+          <div className="flex items-center justify-center gap-2 text-lg sm:text-xl text-indigo-400 font-mono mb-6 h-7">
             <Terminal className="w-4 h-4 text-zinc-500" />
             <span>{displayed}</span>
             <span className="inline-block w-2 h-4 bg-indigo-400 animate-pulse ml-0.5" />
           </div>
 
           {/* Bio from CV */}
-          <p className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-2xl mb-8 mx-auto lg:mx-0">
+          <p className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-2xl mb-8 mx-auto">
             Software Engineer across <span className="text-white font-medium">embedded systems</span>,{' '}
             <span className="text-white font-medium">backend engineering</span>, and{' '}
             <span className="text-white font-medium">applied AI/ML</span>. Experienced in production
@@ -73,7 +73,7 @@ export default function Hero({ onOpenTerminal }: HeroProps) {
           </p>
 
           {/* Location & Key CV Chips */}
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mb-8">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 mb-8">
             <div className="flex items-center gap-1.5 text-xs text-zinc-300 bg-zinc-900/80 border border-zinc-800 px-3 py-1.5 rounded-md">
               <MapPin className="w-3.5 h-3.5 text-indigo-400" />
               <span>Nyabihu, Rwanda</span>
@@ -89,7 +89,7 @@ export default function Hero({ onOpenTerminal }: HeroProps) {
           </div>
 
           {/* Action buttons */}
-          <div className="flex flex-wrap justify-center lg:justify-start items-center gap-3 mb-10">
+          <div className="flex flex-wrap justify-center items-center gap-3 mb-10">
             {onOpenTerminal && (
               <button
                 onClick={onOpenTerminal}
@@ -124,7 +124,7 @@ export default function Hero({ onOpenTerminal }: HeroProps) {
           </div>
 
           {/* Social links */}
-          <div className="flex items-center justify-center lg:justify-start gap-2.5">
+          <div className="flex items-center justify-center gap-2.5">
             {[
               { href: 'https://github.com/Byukusenge-Andrew', icon: <Github className="w-4 h-4" />, label: 'GitHub' },
               { href: 'https://linkedin.com/in/andre-byukusenge-a0100021a', icon: <Linkedin className="w-4 h-4" />, label: 'LinkedIn' },
@@ -141,43 +141,6 @@ export default function Hero({ onOpenTerminal }: HeroProps) {
                 {s.icon}
               </a>
             ))}
-          </div>
-        </div>
-
-        {/* Profile Card */}
-        <div className="flex-shrink-0">
-          <div className="relative w-64 sm:w-72 p-2 rounded-xl bg-zinc-900/90 border border-zinc-800/90 shadow-md">
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-800/80 px-1">
-              <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-zinc-700/60" />
-                <div className="w-2.5 h-2.5 rounded-full bg-zinc-700/60" />
-                <div className="w-2.5 h-2.5 rounded-full bg-zinc-700/60" />
-              </div>
-              <span className="font-mono text-[11px] text-zinc-500">andre_byukusenge.jpg</span>
-            </div>
-
-            <div className="rounded-lg overflow-hidden bg-zinc-950 aspect-[4/5] relative">
-              <img
-                src="/student image.webp"
-                alt="Andre Byukusenge"
-                className="w-full h-full object-cover filter contrast-[1.02]"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  if (target.parentElement) {
-                    target.parentElement.innerHTML = '<div class="w-full h-full flex flex-col items-center justify-center bg-zinc-900 text-zinc-400 font-mono text-xs"><span class="text-2xl font-bold text-zinc-300 mb-1">AB</span><span>byukusengeandre.vercel.app</span></div>';
-                  }
-                }}
-              />
-            </div>
-
-            <div className="pt-2 px-1 flex items-center justify-between text-xs text-zinc-400">
-              <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span>Rwanda Coding Academy</span>
-              </div>
-              <span className="font-mono text-[11px] text-zinc-500">Class of 2026</span>
-            </div>
           </div>
         </div>
       </div>
