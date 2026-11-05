@@ -1,122 +1,145 @@
-import { motion } from 'framer-motion';
-import { FaDownload } from 'react-icons/fa';
-import { Code2, Users, Globe, Coffee } from 'lucide-react';
+import { Download, GraduationCap, CheckCircle2 } from 'lucide-react';
 
-const stats = [
-  { icon: <Code2 className="w-5 h-5" />, value: '25+', label: 'Projects Built' },
-  { icon: <Users className="w-5 h-5" />, value: '15+', label: 'Happy Clients' },
-  { icon: <Globe className="w-5 h-5" />, value: '3+', label: 'Years Coding' },
-  { icon: <Coffee className="w-5 h-5" />, value: '∞', label: 'Cups of Coffee' },
+const coreHighlights = [
+  'Embedded systems & low-level systems programming in C / C++',
+  'Production backend services using NestJS, PostgreSQL & AWS EC2',
+  'Offline, CPU-only edge AI: QLoRA fine-tuning, GGUF/llama.cpp & FAISS RAG',
+  'Cybersecurity code review, vulnerability auditing & network defense',
+];
+
+const extracurriculars = [
+  { title: "RCA Brainiacs Mentor", desc: "Mentored junior students in programming and software development." },
+  { title: "Reading, Chess & CodeTech Clubs", desc: "Active member in computational thinking and strategy groups." },
+  { title: "FIRST Lego League Morocco", desc: "Award for team collaboration representing Rwanda in robotics." },
+  { title: "Football Team Member", desc: "Rwanda Coding Academy weekly training and competitive matches." },
 ];
 
 const About = () => {
   return (
-    <section className="py-24 bg-gray-900/50" id="about">
+    <section className="py-20 bg-[#0c0e15] border-t border-white/[0.06]" id="about">
       <div className="container mx-auto px-6">
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full" />
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-16 items-center max-w-5xl mx-auto">
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="relative w-full max-w-sm mx-auto">
-              {/* Decorative border */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl transform rotate-3 opacity-70" />
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl transform -rotate-2 opacity-40" />
-              <img
-                src="/student image.webp"
-                alt="Byukusenge Andre"
-                className="relative z-10 rounded-2xl shadow-2xl w-full object-cover aspect-[4/5]"
-                onError={(e) => {
-                  const t = e.target as HTMLImageElement;
-                  t.src = 'https://api.dicebear.com/8.x/initials/svg?seed=AB&backgroundColor=6366f1';
-                }}
-              />
-            </div>
-          </motion.div>
-
-          {/* Text */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <h3 className="text-3xl font-bold text-white">
-              Hello! I'm{' '}
-              <span className="gradient-text">Byukusenge Andre</span>
-            </h3>
-
-            <p className="text-slate-300 leading-relaxed">
-              I'm a passionate <span className="text-indigo-400 font-medium">Full Stack Developer</span> with
-              a keen eye for creating elegant solutions in the least amount of time. I specialize in building
-              robust, scalable applications that meet real business needs while delivering the best possible
-              user experience.
-            </p>
-
-            <p className="text-slate-400 leading-relaxed">
-              With a diverse skill set spanning frontend, backend, cloud, and AI/ML, I excel at leading teams
-              and tackling complex technological challenges. My experience with languages like JavaScript, Python,
-              C++, and Java gives me a strong foundation to deliver innovative solutions in high-pressure environments.
-            </p>
-
-            {/* Download button */}
-            <div className="flex flex-wrap gap-4 pt-2">
-              <motion.a
-                href="/cisc_2_2.pdf"
-                download
-                className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-all shadow-lg shadow-indigo-500/20"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <FaDownload />
-                Download Resume
-              </motion.a>
-              <a
-                href="#contact"
-                className="flex items-center gap-2 border border-indigo-500/40 text-indigo-300 px-6 py-3 rounded-xl font-medium hover:bg-indigo-500/10 transition-all"
-              >
-                Hire Me
-              </a>
-            </div>
-          </motion.div>
+        {/* Section Header */}
+        <div className="max-w-2xl mb-12">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-indigo-400 mb-2">
+            <span className="w-2 h-px bg-indigo-500" />
+            <span>Profile &amp; Credentials</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">About Me</h2>
+          <p className="text-zinc-400 text-sm mt-2 leading-relaxed">
+            Software engineer across embedded systems, backend infrastructure, and applied AI/ML.
+          </p>
         </div>
 
-        {/* Stats row */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 max-w-3xl mx-auto"
-        >
-          {stats.map((stat, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.05 }}
-              className="glass-card rounded-2xl p-6 text-center border border-indigo-500/10"
-            >
-              <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 mx-auto mb-3">
-                {stat.icon}
+        <div className="grid lg:grid-cols-12 gap-10 items-start">
+          {/* Main Story & Education */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* Bio summary */}
+            <div className="p-6 rounded-xl bg-zinc-900/60 border border-zinc-800/80 space-y-4">
+              <h3 className="text-lg font-semibold text-white">
+                Systems-level rigor paired with modern full-stack &amp; applied AI.
+              </h3>
+              <p className="text-zinc-300 text-sm leading-relaxed">
+                I am a software engineer with a comprehensive background in embedded systems, backend engineering, and applied machine learning. My technical capabilities are best represented by{' '}
+                <span className="text-white font-medium">Rights Navigator</span>, an offline legal AI assistant fine-tuned and quantized for CPU-only execution across four African jurisdictions (Rwanda, Kenya, Nigeria, Tanzania).
+              </p>
+              <p className="text-zinc-400 text-sm leading-relaxed">
+                I have developed and shipped production backend services in NestJS and PostgreSQL on AWS EC2, conducted independent research into novel similarity-gated RAG indexing techniques, and performed vulnerability analysis and cybersecurity code reviews.
+              </p>
+
+              {/* Core capabilities list */}
+              <div className="pt-2 border-t border-zinc-800/80">
+                <p className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-3">Core Engineering Competencies</p>
+                <div className="grid sm:grid-cols-2 gap-2.5">
+                  {coreHighlights.map((item, i) => (
+                    <div key={i} className="flex items-start gap-2 text-xs text-zinc-300">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400 mt-0.5 flex-shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <p className="text-3xl font-bold gradient-text mb-1">{stat.value}</p>
-              <p className="text-slate-400 text-sm">{stat.label}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+            </div>
+
+            {/* Education Card */}
+            <div className="p-6 rounded-xl bg-zinc-900/60 border border-zinc-800/80">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-lg bg-zinc-800/80 border border-zinc-700/60 flex items-center justify-center">
+                  <GraduationCap className="w-4 h-4 text-indigo-400" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-white">Rwanda Coding Academy</h4>
+                  <p className="text-xs text-indigo-400 font-medium">High School Diploma, Software Engineering &amp; Embedded Systems &bull; 2026</p>
+                </div>
+              </div>
+              <ul className="text-xs text-zinc-400 space-y-1.5 list-disc list-inside pl-1">
+                <li>Studied software engineering together with low-level embedded hardware systems.</li>
+                <li>Completed specialized cybersecurity training and placed 2nd in a nationwide cybersecurity competition.</li>
+                <li>Active in coding tournaments, mentored junior developers in coding practices, and organized STEM sessions.</li>
+              </ul>
+            </div>
+
+            {/* Actions */}
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="/cisc_2_2.pdf"
+                download
+                className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-md text-sm font-medium transition-colors shadow-sm"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download Resume</span>
+              </a>
+              <a
+                href="#contact"
+                className="flex items-center gap-2 border border-zinc-800 hover:border-zinc-700 bg-zinc-900/50 text-zinc-300 hover:text-white px-5 py-2.5 rounded-md text-sm font-medium transition-colors"
+              >
+                Get in Touch
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Specs & Extracurriculars */}
+          <div className="lg:col-span-5 space-y-5">
+            {/* Professional Specs */}
+            <div className="p-5 rounded-xl bg-zinc-900/60 border border-zinc-800/80">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-3">Professional Attributes</h4>
+              <dl className="divide-y divide-zinc-800/60 text-xs">
+                <div className="py-2 flex justify-between">
+                  <dt className="text-zinc-500">Location</dt>
+                  <dd className="text-zinc-200 font-medium">Nyabihu, Rwanda</dd>
+                </div>
+                <div className="py-2 flex justify-between">
+                  <dt className="text-zinc-500">Specialization</dt>
+                  <dd className="text-zinc-200 font-medium">Backend, Embedded &amp; Applied AI</dd>
+                </div>
+                <div className="py-2 flex justify-between">
+                  <dt className="text-zinc-500">Institution</dt>
+                  <dd className="text-zinc-200 font-medium">Rwanda Coding Academy</dd>
+                </div>
+                <div className="py-2 flex justify-between">
+                  <dt className="text-zinc-500">Languages</dt>
+                  <dd className="text-zinc-200 font-medium">English (Expert), Kinyarwanda (Expert), French (Int.)</dd>
+                </div>
+                <div className="py-2 flex justify-between">
+                  <dt className="text-zinc-500">Flagship Work</dt>
+                  <dd className="text-indigo-400 font-medium">Rights Navigator (ADTC 2026)</dd>
+                </div>
+              </dl>
+            </div>
+
+            {/* Extracurriculars from CV */}
+            <div className="p-5 rounded-xl bg-zinc-900/60 border border-zinc-800/80">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-3">Extracurricular Leadership</h4>
+              <div className="space-y-3">
+                {extracurriculars.map((e, idx) => (
+                  <div key={idx} className="pb-2.5 border-b border-zinc-800/50 last:border-0 last:pb-0">
+                    <p className="text-xs font-semibold text-white mb-0.5">{e.title}</p>
+                    <p className="text-xs text-zinc-400 leading-relaxed">{e.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

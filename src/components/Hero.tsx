@@ -1,13 +1,12 @@
-import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Download, Twitter } from 'lucide-react';
-import Shapes3D from './Shapes3D';
 import { useState, useEffect } from 'react';
+import { ArrowDown, Github, Linkedin, Download, Twitter, MapPin, Terminal, Briefcase, Sparkles } from 'lucide-react';
+import Shapes3D from './Shapes3D';
 
 const roles = [
-  'Full Stack Developer',
-  'AI / ML Enthusiast',
-  '3D Visualization Engineer',
-  'Open Source Contributor',
+  'Software Engineer',
+  'Backend Engineer (NestJS / PostgreSQL)',
+  'Embedded & Systems Developer (C / C++)',
+  'Applied AI / ML & RAG Specialist',
 ];
 
 export default function Hero() {
@@ -20,11 +19,11 @@ export default function Hero() {
     let timeout: number;
 
     if (!isDeleting && displayed.length < current.length) {
-      timeout = window.setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 80);
+      timeout = window.setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 60);
     } else if (!isDeleting && displayed.length === current.length) {
-      timeout = window.setTimeout(() => setIsDeleting(true), 2000);
+      timeout = window.setTimeout(() => setIsDeleting(true), 2200);
     } else if (isDeleting && displayed.length > 0) {
-      timeout = window.setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 45);
+      timeout = window.setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 30);
     } else if (isDeleting && displayed.length === 0) {
       setIsDeleting(false);
       setRoleIndex((prev) => (prev + 1) % roles.length);
@@ -34,108 +33,88 @@ export default function Hero() {
   }, [displayed, isDeleting, roleIndex]);
 
   return (
-    <section className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-950 via-indigo-950 to-gray-900 flex items-center">
-      {/* Rotating tech logo rings */}
-      <div className="absolute inset-0 opacity-30">
-        <Shapes3D />
-      </div>
+    <section className="min-h-screen relative overflow-hidden bg-[#090a0f] flex items-center pt-24 pb-16">
+      {/* Revolving Programming Language Rings */}
+      <Shapes3D />
 
-      {/* Animated blobs layered on top */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl animate-blob" />
-      <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
-      <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-pink-600/15 rounded-full blur-3xl animate-blob animation-delay-4000" />
-
-      {/* Grid overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(99,102,241,1) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,1) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
-      />
-
-      <div className="container relative z-10 mx-auto px-6 py-24 flex flex-col lg:flex-row items-center gap-16 min-h-screen">
-        {/* Text block */}
+      <div className="container relative z-10 mx-auto px-6 py-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+        {/* Main Content */}
         <div className="flex-1 text-center lg:text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 mb-6">
-              👋 Available for opportunities
+          {/* Status badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-zinc-900/90 border border-zinc-800 text-zinc-300 mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-          </motion.div>
+            <span>Available for new projects &amp; collaborations</span>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 text-white"
-          >
-            Hi, I'm{' '}
-            <span className="gradient-text">Andre</span>
-          </motion.h1>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-3">
+            Andre <span className="text-white">Byukusenge</span>
+          </h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl md:text-2xl text-slate-300 mb-8 h-8"
-          >
-            <span className="typewriter-cursor">{displayed}</span>
-          </motion.div>
+          {/* Typewriter role */}
+          <div className="flex items-center justify-center lg:justify-start gap-2 text-lg sm:text-xl text-indigo-400 font-mono mb-6 h-7">
+            <Terminal className="w-4 h-4 text-zinc-500" />
+            <span>{displayed}</span>
+            <span className="inline-block w-2 h-4 bg-indigo-400 animate-pulse ml-0.5" />
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-slate-400 text-lg max-w-xl mb-10 leading-relaxed mx-auto lg:mx-0"
-          >
-            Passionate developer based in <span className="text-indigo-400 font-medium">Kigali, Rwanda</span> — building
-            elegant, high-performance web apps and AI-powered solutions that solve real-world problems.
-          </motion.p>
+          {/* Bio from CV */}
+          <p className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-2xl mb-8 mx-auto lg:mx-0">
+            Software Engineer across <span className="text-white font-medium">embedded systems</span>,{' '}
+            <span className="text-white font-medium">backend engineering</span>, and{' '}
+            <span className="text-white font-medium">applied AI/ML</span>. Experienced in production
+            NestJS/PostgreSQL services, low-level systems programming in C/C++, and independent research into offline, CPU-only RAG pipelines (ADTC 2026).
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10"
-          >
+          {/* Location & Key CV Chips */}
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mb-8">
+            <div className="flex items-center gap-1.5 text-xs text-zinc-300 bg-zinc-900/80 border border-zinc-800 px-3 py-1.5 rounded-md">
+              <MapPin className="w-3.5 h-3.5 text-indigo-400" />
+              <span>Nyabihu, Rwanda</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-zinc-300 bg-zinc-900/80 border border-zinc-800 px-3 py-1.5 rounded-md">
+              <Briefcase className="w-3.5 h-3.5 text-indigo-400" />
+              <span>Rwanda Coding Academy</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-zinc-300 bg-zinc-900/80 border border-zinc-800 px-3 py-1.5 rounded-md">
+              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+              <span>Rights Navigator · ADTC 2026</span>
+            </div>
+          </div>
+
+          {/* Action buttons */}
+          <div className="flex flex-wrap justify-center lg:justify-start items-center gap-3 mb-10">
             <a
               href="#projects"
-              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold hover:opacity-90 hover:-translate-y-0.5 transition-all shadow-lg shadow-indigo-500/30"
+              className="px-5 py-2.5 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors flex items-center gap-1.5 shadow-sm"
             >
-              View My Work
+              <span>Explore Projects</span>
+              <ArrowDown className="w-4 h-4" />
             </a>
             <a
               href="/cisc_2_2.pdf"
               download
-              className="px-8 py-3.5 rounded-full border border-indigo-500/50 text-indigo-300 font-semibold hover:bg-indigo-500/10 hover:-translate-y-0.5 transition-all flex items-center gap-2"
+              className="px-5 py-2.5 rounded-md border border-white/10 hover:border-white/20 bg-zinc-900/80 text-zinc-200 hover:text-white text-sm font-medium transition-colors flex items-center gap-1.5"
             >
-              <Download className="w-4 h-4" />
-              Download CV
+              <Download className="w-4 h-4 text-zinc-400" />
+              <span>Download CV</span>
             </a>
             <a
               href="#contact"
-              className="px-8 py-3.5 rounded-full border border-slate-600 text-slate-300 font-semibold hover:border-slate-400 hover:-translate-y-0.5 transition-all"
+              className="px-5 py-2.5 rounded-md border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-200 text-sm font-medium transition-colors"
             >
               Contact Me
             </a>
-          </motion.div>
+          </div>
 
           {/* Social links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex items-center justify-center lg:justify-start gap-4"
-          >
+          <div className="flex items-center justify-center lg:justify-start gap-2.5">
             {[
-              { href: 'https://github.com/Byukusenge-Andrew', icon: <Github className="w-5 h-5" />, label: 'GitHub' },
-              { href: 'https://linkedin.com/in/andre-byukusenge-a0100021a', icon: <Linkedin className="w-5 h-5" />, label: 'LinkedIn' },
-              { href: 'https://x.com/drefa4lt', icon: <Twitter className="w-5 h-5" />, label: 'Twitter' },
+              { href: 'https://github.com/Byukusenge-Andrew', icon: <Github className="w-4 h-4" />, label: 'GitHub' },
+              { href: 'https://linkedin.com/in/andre-byukusenge-a0100021a', icon: <Linkedin className="w-4 h-4" />, label: 'LinkedIn' },
+              { href: 'https://x.com/drefa4lt', icon: <Twitter className="w-4 h-4" />, label: 'Twitter' },
             ].map((s) => (
               <a
                 key={s.label}
@@ -143,71 +122,57 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="w-10 h-10 rounded-lg border border-slate-700 flex items-center justify-center text-slate-400 hover:text-indigo-400 hover:border-indigo-500 transition-all"
+                className="w-8 h-8 rounded-md border border-zinc-800 bg-zinc-900/60 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors"
               >
                 {s.icon}
               </a>
             ))}
-          </motion.div>
+          </div>
         </div>
 
-        {/* Avatar block */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex-shrink-0 relative"
-        >
-          <div className="relative w-64 h-64 md:w-80 md:h-80">
-            {/* Glow ring */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 blur-xl opacity-40 animate-pulse" />
-            <div className="absolute inset-0.5 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-1">
-              <div className="w-full h-full rounded-full overflow-hidden bg-gray-900">
-                <img
-                  src="/student image.webp"
-                  alt="Byukusenge Andre"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    if (target.parentElement) {
-                      target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-6xl">👨‍💻</div>';
-                    }
-                  }}
-                />
+        {/* Profile Card */}
+        <div className="flex-shrink-0">
+          <div className="relative w-64 sm:w-72 p-2 rounded-xl bg-zinc-900/90 border border-zinc-800/90 shadow-md">
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-800/80 px-1">
+              <div className="flex items-center gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-zinc-700/60" />
+                <div className="w-2.5 h-2.5 rounded-full bg-zinc-700/60" />
+                <div className="w-2.5 h-2.5 rounded-full bg-zinc-700/60" />
               </div>
+              <span className="font-mono text-[11px] text-zinc-500">andre_byukusenge.jpg</span>
             </div>
 
-            {/* Floating badge */}
-            <motion.div
-              animate={{ y: [-4, 4, -4] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="absolute -bottom-4 -right-4 glass-card px-3 py-2 rounded-xl text-sm font-medium text-indigo-300 border border-indigo-500/20"
-            >
-              🚀 Open to work
-            </motion.div>
-            <motion.div
-              animate={{ y: [4, -4, 4] }}
-              transition={{ duration: 3.5, repeat: Infinity }}
-              className="absolute -top-4 -left-4 glass-card px-3 py-2 rounded-xl text-sm font-medium text-emerald-300 border border-emerald-500/20"
-            >
-              💻 Full Stack
-            </motion.div>
+            <div className="rounded-lg overflow-hidden bg-zinc-950 aspect-[4/5] relative">
+              <img
+                src="/student image.webp"
+                alt="Andre Byukusenge"
+                className="w-full h-full object-cover filter contrast-[1.02]"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  if (target.parentElement) {
+                    target.parentElement.innerHTML = '<div class="w-full h-full flex flex-col items-center justify-center bg-zinc-900 text-zinc-400 font-mono text-xs"><span class="text-2xl font-bold text-zinc-300 mb-1">AB</span><span>byukusengeandre.vercel.app</span></div>';
+                  }
+                }}
+              />
+            </div>
+
+            <div className="pt-2 px-1 flex items-center justify-between text-xs text-zinc-400">
+              <div className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span>Rwanda Coding Academy</span>
+              </div>
+              <span className="font-mono text-[11px] text-zinc-500">Class of 2026</span>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float"
-      >
-        <a href="#about" aria-label="Scroll down">
-          <ArrowDown className="w-6 h-6 text-indigo-400" />
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-zinc-500 hover:text-zinc-300 transition-colors">
+        <a href="#about" aria-label="Scroll to About section" className="p-2 inline-block">
+          <ArrowDown className="w-4 h-4 animate-bounce" />
         </a>
-      </motion.div>
+      </div>
     </section>
   );
 }

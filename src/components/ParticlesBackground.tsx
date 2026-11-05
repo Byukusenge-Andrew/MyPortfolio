@@ -9,7 +9,7 @@ const ParticlesBackground = () => {
 
   return (
     <Particles
-      className="fixed inset-0 -z-10"
+      className="fixed inset-0 -z-10 pointer-events-none"
       id="tsparticles"
       init={particlesInit}
       options={{
@@ -18,16 +18,16 @@ const ParticlesBackground = () => {
             value: "transparent",
           },
         },
-        fpsLimit: 120,
+        fpsLimit: 60,
         particles: {
           color: {
-            value: ["#6366f1", "#8b5cf6", "#d946ef"],
+            value: "#94a3b8",
           },
           links: {
-            color: "#8b5cf6",
-            distance: 150,
+            color: "#64748b",
+            distance: 140,
             enable: true,
-            opacity: 0.2,
+            opacity: 0.08,
             width: 1,
           },
           move: {
@@ -37,67 +37,25 @@ const ParticlesBackground = () => {
               default: "bounce",
             },
             random: true,
-            speed: 1.5,
+            speed: 0.6,
             straight: false,
           },
           number: {
             density: {
               enable: true,
-              area: 800,
+              area: 900,
             },
-            value: 40,
+            value: 28,
           },
           opacity: {
-            value: 0.4,
-            random: true,
-            anim: {
-              enable: true,
-              speed: 1,
-              opacity_min: 0.1,
-              sync: false
-            }
+            value: 0.18,
           },
           shape: {
             type: "circle",
           },
           size: {
-            value: { min: 1, max: 5 },
-            random: true,
-            anim: {
-              enable: true,
-              speed: 2,
-              size_min: 0.1,
-              sync: false
-            }
+            value: { min: 1, max: 2.5 },
           },
-          wobble: {
-            enable: true,
-            distance: 10,
-            speed: 10,
-          },
-        },
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onHover: {
-              enable: true,
-              mode: "repulse",
-            },
-            onClick: {
-              enable: true,
-              mode: "push",
-            },
-            resize: true
-          },
-          modes: {
-            repulse: {
-              distance: 100,
-              duration: 0.4,
-            },
-            push: {
-              quantity: 4,
-            },
-          }
         },
         detectRetina: true,
       }}
@@ -105,4 +63,4 @@ const ParticlesBackground = () => {
   );
 };
 
-export default ParticlesBackground; 
+export default ParticlesBackground;

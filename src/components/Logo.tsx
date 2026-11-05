@@ -1,52 +1,15 @@
-import { motion } from 'framer-motion';
-
 const Logo = () => {
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="flex items-center gap-2"
-    >
-      <div className="relative">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ 
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-            delay: 0.1 
-          }}
-          className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg transform rotate-45 flex items-center justify-center shadow-lg"
-        >
-          <span className="text-white font-bold text-xl transform -rotate-45">A</span>
-        </motion.div>
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ 
-            type: "spring",
-            stiffness: 260,
-            damping: 20 
-          }}
-          className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-blue-300 to-purple-400 rounded-full"
-        />
+    <a href="#hero" className="flex items-center gap-2.5 group cursor-pointer focus:outline-none">
+      <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-indigo-400 group-hover:border-indigo-500/50 group-hover:bg-indigo-500/10 transition-colors">
+        <span className="font-mono text-sm font-semibold tracking-tighter select-none">&gt;_</span>
       </div>
-      <motion.div
-        initial={{ x: -20, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="text-xl font-bold"
-      >
-        <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-          Andre
-        </span>
-        <span className="text-gray-700">
-          .dev
-        </span>
-      </motion.div>
-    </motion.div>
+      <div className="flex items-baseline tracking-tight font-semibold text-base">
+        <span className="text-white group-hover:text-indigo-300 transition-colors">Andre</span>
+        <span className="text-zinc-500 font-mono text-xs ml-0.5">.dev</span>
+      </div>
+    </a>
   );
 };
 
-export default Logo; 
+export default Logo;

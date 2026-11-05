@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github } from 'lucide-react';
+import { Github, FileText, Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
 const navItems = [
@@ -23,15 +23,17 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    const sectionIds = ['hero', 'about', 'skills', 'projects', 'achievements', 'testimonials', 'contact'];
+    const sectionIds = ['hero', 'about', 'skills', 'projects', 'achievements', 'contact'];
     const observers: IntersectionObserver[] = [];
 
     sectionIds.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
       const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
-        { threshold: 0.4 }
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+        },
+        { threshold: 0.25 }
       );
       obs.observe(el);
       observers.push(obs);
@@ -41,111 +43,109 @@ const Header = () => {
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? 'bg-gray-950/80 backdrop-blur-lg border-b border-white/5 shadow-lg shadow-black/20'
-          : 'bg-transparent'
-        }`}
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+        isScrolled
+          ? 'bg-[#090a0f]/90 backdrop-blur-md border-b border-white/[0.08] shadow-sm'
+          : 'bg-transparent border-b border-transparent'
+      }`}
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           <Logo />
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center space-x-1">
-            {navItems.map((item, index) => {
+          <nav className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => {
               const sectionId = item.href.replace('#', '');
               const isActive = activeSection === sectionId;
               return (
-                <motion.a
+                <a
                   key={item.name}
                   href={item.href}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.08 }}
-                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive
-                      ? 'text-indigo-400'
-                      : 'text-slate-400 hover:text-white'
-                    }`}
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                    isActive
+                      ? 'text-white bg-white/[0.08] border border-white/10'
+                      : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]'
+                  }`}
                 >
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-active"
-                      className="absolute inset-0 rounded-lg bg-indigo-500/10 border border-indigo-500/20"
-                    />
-                  )}
-                  <span className="relative z-10">{item.name}</span>
-                </motion.a>
+                  {item.name}
+                </a>
               );
             })}
+
+            <div className="h-4 w-px bg-white/10 mx-2" />
+
+            <a
+              href="/cisc_2_2.pdf"
+              download
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-zinc-300 hover:text-white hover:bg-white/[0.06] border border-white/10 transition-colors"
+            >
+              <FileText className="w-3.5 h-3.5 text-zinc-400" />
+              <span>Resume</span>
+            </a>
 
             <a
               href="https://github.com/Byukusenge-Andrew"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
-              className="ml-4 w-9 h-9 rounded-lg border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:border-indigo-500 transition-all"
+              className="w-8 h-8 rounded-md border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-700 hover:bg-white/[0.04] transition-colors ml-1"
             >
               <Github className="w-4 h-4" />
             </a>
           </nav>
 
-          {/* Mobile hamburger */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+            className="md:hidden p-2 rounded-md text-zinc-400 hover:text-white hover:bg-white/[0.06] border border-white/10 transition-colors"
             aria-label="Toggle menu"
           >
-            <div className="w-5 h-4 flex flex-col justify-between">
-              <span className={`w-full h-0.5 bg-current transform transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
-              <span className={`w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0 scale-x-0' : ''}`} />
-              <span className={`w-full h-0.5 bg-current transform transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}`} />
-            </div>
-          </motion.button>
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.nav
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden border-t border-white/5"
+              transition={{ duration: 0.15 }}
+              className="md:hidden overflow-hidden border-t border-white/[0.08] bg-[#0c0e15] px-2 py-4 space-y-1"
             >
-              <div className="py-4 space-y-1">
-                {navItems.map((item, index) => (
-                  <motion.a
-                    key={item.name}
-                    href={item.href}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.06 }}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-2.5 text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                  >
-                    {item.name}
-                  </motion.a>
-                ))}
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-3 py-2 text-sm text-zinc-300 hover:text-white hover:bg-white/[0.05] rounded-md transition-colors"
+                >
+                  {item.name}
+                </a>
+              ))}
+              <div className="pt-2 border-t border-white/[0.08] flex gap-2">
+                <a
+                  href="/cisc_2_2.pdf"
+                  download
+                  className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium text-zinc-200 border border-white/10 rounded-md bg-white/[0.02]"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  Resume
+                </a>
                 <a
                   href="https://github.com/Byukusenge-Andrew"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2.5 text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                  className="px-3 py-2 flex items-center justify-center text-zinc-300 border border-white/10 rounded-md hover:text-white"
                 >
                   <Github className="w-4 h-4" />
-                  GitHub
                 </a>
               </div>
             </motion.nav>
           )}
         </AnimatePresence>
       </div>
-    </motion.header>
+    </header>
   );
 };
 

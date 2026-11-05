@@ -1,105 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg-dark: #030712;
-  --surface: #0f172a;
-  --surface-2: #1e293b;
-  --accent-indigo: #6366f1;
-  --accent-purple: #a855f7;
-  --accent-pink: #ec4899;
-  --text-primary: #f1f5f9;
-  --text-muted: #94a3b8;
-  --border: rgba(99, 102, 241, 0.15);
+  --bg-dark: #090a0f;
+  --surface: #10131b;
+  --surface-2: #161b26;
+  --surface-hover: #1c2230;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-light: #6366f1;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.16);
+  --border-accent: rgba(99, 102, 241, 0.35);
 }
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--bg-dark);
   color: var(--text-primary);
-  @apply antialiased;
+  @apply antialiased selection:bg-indigo-500/30 selection:text-white;
+}
+
+/* Monospace font utility */
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg-dark);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-indigo);
+  background: #1e2433;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-purple);
+  background: #2e384d;
 }
 
-/* Gradient text utility */
-.gradient-text {
-  background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Clean, restrained elevation card */
+.ui-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+  transition: border-color 180ms ease-out, background-color 180ms ease-out, transform 180ms ease-out;
 }
 
-/* Glassmorphism card */
-.glass-card {
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(99, 102, 241, 0.15);
+.ui-card:hover {
+  border-color: var(--border-hover);
 }
 
-/* Glow effects */
-.glow-indigo {
-  box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
-}
-.glow-purple {
-  box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
+/* Subtle accent text */
+.accent-text {
+  color: var(--text-primary);
 }
 
-/* Float animation */
-@keyframes float {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-12px); }
-  100% { transform: translateY(0px); }
-}
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+/* Section divider */
+.section-divider {
+  border-top: 1px solid var(--border);
 }
 
-/* Blob animation */
-@keyframes blob {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%        { transform: translate(30px, -30px) scale(1.1); }
-  66%        { transform: translate(-20px, 20px) scale(0.9); }
-}
-.animate-blob {
-  animation: blob 8s infinite;
-}
-.animation-delay-2000 { animation-delay: 2s; }
-.animation-delay-4000 { animation-delay: 4s; }
-
-/* Typewriter cursor */
-.typewriter-cursor::after {
-  content: '|';
-  animation: blink 1s step-end infinite;
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
-/* Section separator gradient */
-.section-separator {
-  background: linear-gradient(to right, transparent, rgba(99, 102, 241, 0.4), transparent);
-  height: 1px;
+/* Subtle dot grid pattern */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }

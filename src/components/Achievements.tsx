@@ -1,119 +1,98 @@
-import { motion } from 'framer-motion';
-import { GraduationCap, Trophy, Target, Award } from 'lucide-react';
+import { Trophy, ShieldCheck, Award, Users, Lightbulb } from 'lucide-react';
 
 const achievements = [
   {
-    icon: <Trophy className="w-6 h-6" />,
-    title: "2nd Place — National Hackathon",
-    organization: "National Cybersecurity Authority",
+    icon: <Trophy className="w-4 h-4 text-amber-400" />,
+    title: "2nd Place — Nationwide Cybersecurity Competition",
+    organization: "National Cybersecurity Training",
     date: "2024",
-    color: "from-yellow-500 to-orange-500",
-    glow: "shadow-yellow-500/20",
+    type: "National Award",
+    description: "Competed in high-intensity defensive and offensive cybersecurity challenges, placing 2nd across Rwanda.",
   },
   {
-    icon: <Target className="w-6 h-6" />,
-    title: "Microsoft Certified: Azure Developer",
-    organization: "Microsoft",
-    date: "2024",
-    color: "from-blue-500 to-cyan-500",
-    glow: "shadow-blue-500/20",
+    icon: <Award className="w-4 h-4 text-sky-400" />,
+    title: "FIRST Lego League Morocco",
+    organization: "FIRST Robotics International",
+    date: "2023",
+    type: "International Award",
+    description: "Received award for team collaboration while representing Rwanda in international robotics competitions.",
   },
   {
-    icon: <GraduationCap className="w-6 h-6" />,
-    title: "Cyberium Graduate",
+    icon: <ShieldCheck className="w-4 h-4 text-emerald-400" />,
+    title: "Cyberium Cybersecurity Training",
     organization: "Cyberium Academy",
     date: "2025",
-    color: "from-green-500 to-teal-500",
-    glow: "shadow-green-500/20",
+    type: "Certificate",
+    description: "Rigorous certification covering ethical hacking, defensive security strategies, and network security labs.",
   },
   {
-    icon: <Award className="w-6 h-6" />,
-    title: "Full Stack Developer Certification",
-    organization: "ALX Africa",
-    date: "2024",
-    color: "from-purple-500 to-indigo-500",
-    glow: "shadow-purple-500/20",
+    icon: <Lightbulb className="w-4 h-4 text-indigo-400" />,
+    title: "Ideation & Design Thinking Workshop",
+    organization: "Innovation Labs",
+    date: "Sep 2024",
+    type: "Certificate",
+    description: "Design thinking, rapid prototyping, and creative problem solving for technological product development.",
   },
-];
-
-const stats = [
-  { label: "Certifications", value: "5+" },
-  { label: "Awards Won", value: "3+" },
-  { label: "Projects Completed", value: "25+" },
-  { label: "Happy Clients", value: "15+" },
+  {
+    icon: <Users className="w-4 h-4 text-purple-400" />,
+    title: "RCA Brainiacs Mentor",
+    organization: "Rwanda Coding Academy",
+    date: "2024 – 2025",
+    type: "Leadership",
+    description: "Mentored junior students in low-level programming, software design principles, and competitive coding.",
+  },
 ];
 
 const Achievements = () => {
   return (
-    <section id="achievements" className="py-24 bg-gray-900/60 overflow-hidden">
-      <div className="absolute inset-x-0 top-0 h-px section-separator" />
+    <section id="achievements" className="py-20 bg-[#090a0f] border-t border-white/[0.06]">
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-white mb-4">Achievements</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full mb-6" />
-          <p className="text-slate-400 max-w-2xl mx-auto">
-            Recognition and certifications that reflect my commitment to excellence and continuous growth in technology.
+        <div className="max-w-xl mb-12">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-indigo-400 mb-2">
+            <span className="w-2 h-px bg-indigo-500" />
+            <span>Honors &amp; Credentials</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">Achievements &amp; Certificates</h2>
+          <p className="text-zinc-400 text-sm mt-2 leading-relaxed">
+            Recognitions, cybersecurity tournament awards, and specialized training highlighted in my curriculum vitae.
           </p>
-        </motion.div>
-
-        {/* Achievement cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {achievements.map((achievement, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -6 }}
-              className={`glass-card rounded-2xl overflow-hidden border border-white/5 hover:border-indigo-500/30 shadow-xl ${achievement.glow} transition-all duration-300`}
-            >
-              {/* Header gradient */}
-              <div className={`bg-gradient-to-r ${achievement.color} p-5`}>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="p-2 bg-white/20 rounded-lg">
-                    {achievement.icon}
-                  </div>
-                  <span className="text-white/80 text-sm font-medium bg-white/10 px-2 py-0.5 rounded-full">
-                    {achievement.date}
-                  </span>
-                </div>
-                <h3 className="text-white font-bold text-sm leading-tight">{achievement.title}</h3>
-              </div>
-              {/* Body */}
-              <div className="p-4">
-                <p className="text-slate-400 text-sm">{achievement.organization}</p>
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: '100%' }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, delay: index * 0.2 }}
-                  className={`h-0.5 mt-4 bg-gradient-to-r ${achievement.color} rounded-full opacity-50`}
-                />
-              </div>
-            </motion.div>
-          ))}
         </div>
 
-        {/* Stats row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
-          {stats.map((stat, index) => (
-            <motion.div
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {achievements.map((item, index) => (
+            <div
               key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="glass-card rounded-2xl p-6 text-center border border-indigo-500/10"
+              className="p-5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 hover:border-zinc-700 flex flex-col justify-between transition-colors"
             >
-              <h3 className="text-3xl font-extrabold gradient-text">{stat.value}</h3>
-              <p className="text-slate-400 text-sm mt-1">{stat.label}</p>
-            </motion.div>
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-8 h-8 rounded-lg bg-zinc-800/80 border border-zinc-700/60 flex items-center justify-center">
+                    {item.icon}
+                  </div>
+                  <span className="px-2 py-0.5 rounded text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800">
+                    {item.date}
+                  </span>
+                </div>
+
+                <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 mb-1">
+                  {item.type}
+                </div>
+                <h3 className="text-sm font-semibold text-white leading-snug mb-1">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-indigo-400 font-medium mb-3">
+                  {item.organization}
+                </p>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+
+              <div className="pt-4 mt-4 border-t border-zinc-800/60 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                <span>Credential Status</span>
+                <span className="text-emerald-400">Verified</span>
+              </div>
+            </div>
           ))}
         </div>
       </div>

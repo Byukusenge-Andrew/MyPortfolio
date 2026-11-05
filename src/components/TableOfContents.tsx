@@ -1,24 +1,23 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { ListOrdered, X } from 'lucide-react';
 
 const sections = [
-  { id: 'hero', label: 'Home' },
+  { id: 'hero', label: 'Overview' },
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' },
   { id: 'achievements', label: 'Achievements' },
-  { id: 'testimonials', label: 'Testimonials' },
   { id: 'contact', label: 'Contact' }
 ];
 
 const TableOfContents = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentPosition = window.scrollY + 100;
+      const currentPosition = window.scrollY + 120;
 
       for (const section of sections) {
         const element = document.getElementById(section.id);
@@ -32,53 +31,48 @@ const TableOfContents = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50">
+    <div className="fixed right-5 top-1/2 -translate-y-1/2 z-40 hidden lg:block">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-3 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700 hover:shadow-xl transition-all duration-300"
+        aria-label="Table of Contents"
+        className="p-2.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white rounded-lg border border-zinc-800 shadow-sm transition-colors"
       >
-        {isOpen ? <X size={20} /> : <Menu size={20} />}
+        {isOpen ? <X size={16} /> : <ListOrdered size={16} />}
       </button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, x: 100 }}
+            initial={{ opacity: 0, x: 15 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 100 }}
-            className="absolute right-12 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm rounded-lg shadow-xl p-4 min-w-[200px] border border-gray-100"
+            exit={{ opacity: 0, x: 15 }}
+            transition={{ duration: 0.15 }}
+            className="absolute right-12 top-1/2 -translate-y-1/2 bg-[#11131a] rounded-xl shadow-xl p-3 min-w-[180px] border border-white/10"
           >
+            <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 px-3 py-1 mb-1 border-b border-white/[0.06]">
+              Navigation
+            </div>
             <nav>
-              <ul className="space-y-2">
+              <ul className="space-y-1">
                 {sections.map((section) => (
-                  <motion.li
-                    key={section.id}
-                    whileHover={{ x: 5 }}
-                    className="relative"
-                  >
+                  <li key={section.id}>
                     <a
                       href={`#${section.id}`}
                       onClick={() => setIsOpen(false)}
-                      className={`block py-2 px-4 rounded-lg transition-all duration-300 ${
+                      className={`block py-1.5 px-3 rounded text-xs font-medium transition-colors ${
                         activeSection === section.id
-                          ? 'bg-indigo-600 text-white'
-                          : 'hover:bg-indigo-50 text-gray-700'
+                          ? 'bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 font-semibold'
+                          : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
                       }`}
                     >
                       {section.label}
-                      {activeSection === section.id && (
-                        <motion.div
-                          layoutId="activeIndicator"
-                          className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-4 bg-white rounded-r"
-                        />
-                      )}
                     </a>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </nav>
@@ -89,4 +83,4 @@ const TableOfContents = () => {
   );
 };
 
-export default TableOfContents; 
+export default TableOfContents;

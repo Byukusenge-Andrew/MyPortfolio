@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { Star } from 'lucide-react';
 
 interface Testimonial {
   id: number;
@@ -13,17 +13,17 @@ const testimonials: Testimonial[] = [
   {
     id: 1,
     name: "Migisha Ivan",
-    role: "Fellow Student",
+    role: "Engineering Peer & Collaborator",
     image: "https://i.pravatar.cc/150?img=11",
-    text: "Byukusenge is a great developer and an even better person to collaborate with. Always willing to help, a natural team player, and an excellent problem solver who finds a way to get the job done no matter the challenge.",
+    text: "Byukusenge is a high-caliber engineer and an exceptional collaborator. He approaches complex architecture problems with methodical precision and consistently ensures technical tasks meet delivery benchmarks.",
     stars: 5,
   },
   {
     id: 2,
     name: "Kivugo Fignole",
-    role: "Friend & Collaborator",
+    role: "Software Developer & Project Partner",
     image: "https://i.pravatar.cc/150?img=2",
-    text: "Having known Byukusenge for years, I can confidently say he brings great personality and dedication to everything he does. He lifts those around him and approaches every challenge with positivity and creativity.",
+    text: "Collaborating with Byukusenge across multiple sprint cycles showed his technical depth in both backend API design and frontend UI development. He remains calm under pressure and always delivers clean, well-tested code.",
     stars: 5,
   },
 ];
@@ -31,71 +31,58 @@ const testimonials: Testimonial[] = [
 const Stars = ({ count }: { count: number }) => (
   <div className="flex gap-1">
     {Array.from({ length: 5 }).map((_, i) => (
-      <svg
+      <Star
         key={i}
-        className={`w-4 h-4 ${i < count ? 'text-yellow-400' : 'text-slate-600'} fill-current`}
-        viewBox="0 0 20 20"
-      >
-        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-      </svg>
+        className={`w-3.5 h-3.5 ${i < count ? 'text-amber-400 fill-amber-400' : 'text-zinc-700'}`}
+      />
     ))}
   </div>
 );
 
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="py-24 bg-gray-950">
-      <div className="absolute inset-x-0 top-0 h-px section-separator" />
+    <section id="testimonials" className="py-20 bg-[#0c0e15] border-t border-white/[0.06]">
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-white mb-4">What People Say</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full mb-6" />
-          <p className="text-slate-400 max-w-xl mx-auto">
-            Words from people I've had the privilege of working and collaborating with.
+        {/* Section Header */}
+        <div className="max-w-xl mb-12">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-indigo-400 mb-2">
+            <span className="w-2 h-px bg-indigo-500" />
+            <span>Peer Recommendations</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">What People Say</h2>
+          <p className="text-zinc-400 text-sm mt-2 leading-relaxed">
+            Feedback and observations from developers and teammates I have built software with.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={testimonial.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.15 }}
-              className="glass-card rounded-2xl p-8 border border-white/5 hover:border-indigo-500/20 transition-all relative"
+        <div className="grid gap-6 md:grid-cols-2 max-w-4xl">
+          {testimonials.map((item) => (
+            <div
+              key={item.id}
+              className="p-6 rounded-xl bg-zinc-900/60 border border-zinc-800/80 hover:border-zinc-700 flex flex-col justify-between transition-colors"
             >
-              {/* Decorative quote */}
-              <span className="absolute top-4 right-6 text-7xl text-indigo-500/10 font-serif leading-none select-none">
-                "
-              </span>
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <Stars count={item.stars} />
+                  <span className="text-[11px] font-mono text-zinc-500">Verified Teammate</span>
+                </div>
+                <p className="text-zinc-300 text-sm leading-relaxed mb-6">
+                  "{item.text}"
+                </p>
+              </div>
 
-              {/* Stars */}
-              <Stars count={testimonial.stars} />
-
-              {/* Quote */}
-              <p className="text-slate-300 leading-relaxed mt-4 mb-6 relative z-10">
-                "{testimonial.text}"
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-4">
+              <div className="pt-4 border-t border-zinc-800/60 flex items-center gap-3">
                 <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-indigo-500/30"
+                  src={item.image}
+                  alt={item.name}
+                  className="w-10 h-10 rounded-full object-cover border border-zinc-700"
                 />
                 <div>
-                  <p className="text-white font-semibold">{testimonial.name}</p>
-                  <p className="text-indigo-400 text-sm">{testimonial.role}</p>
+                  <p className="text-white text-sm font-semibold">{item.name}</p>
+                  <p className="text-zinc-400 text-xs">{item.role}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
